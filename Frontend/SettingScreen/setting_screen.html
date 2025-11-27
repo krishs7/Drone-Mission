@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setting Screen</title>
+    <link rel="stylesheet" href="setting_screen.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- website: font awesome-->
+
+</head>
+<body>
+    <nav class="navbar-container">
+        <a class="nav-button" href="../mainscreen/mainscreen.html"><i class="fa-solid fa-house"></i></a><!--might need to remove target=blank-->
+        <a class="nav-button" href="../DroneScreen/drone_screen.html"><img src="/images/drone.png" alt="Drone" width="35px" height="35px"></a><!--might need to remove target=blank-->
+    </nav>
+    
+    <div class="card">
+        <h1 class="settings-title"><i class="fa-solid fa-gear"></i>Settings</h1>
+        <div class="tabs-container">
+            <span class="connection-tab active-tab"><i class="fa-solid fa-tower-broadcast"></i>Connection</span>
+            <span class="controls-tab"><i class="fa-solid fa-gamepad"></i>Controls</span> 
+            <span class="about-tab"><i class="fa-solid fa-circle-info"></i>About/Help</span>
+        </div>
+        <div class="content" id="connection-content">
+            <h2>Connection Settings</h2>
+            <div class="connection-options">
+                <div class="option">
+                    <p>Bluetooth:</p>
+                    <label class="radio-container">
+                        <input type="radio" name="connection-type" value="bluetooth" id="bluetooth-option" checked>
+                        <span class="nearby">Nearby Devices...</span>
+                    </label>
+                </div>
+                <div class="option">
+                    <p>Wi-Fi:</p>
+                    <label class="radio-container">
+                        <input type="radio" name="connection-type" value="wifi" id="wifi-option">
+                        <span class="nearby">Nearby Wi-Fi...</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content" id="controls-content" style="display: none;">
+            <h2>Control Settings</h2>
+            <div class="controls-setting">
+                <div class="control-buttons">
+                    <div class="control-button">
+                        <p>Front:</p>
+                        <select class="key-select" id="front-key"data-default="w" value="W">
+                            <option value="w">W</option>
+                            <option value="d">D</option>
+                            <option value="a">A</option>
+                            <option value="s">S</option>
+                            <option value="up">Up Arrow</option>
+                            <option value="down">Down Arrow</option>
+                            <option value="spacebar">Spacebar</option>
+                        </select>
+                    </div>
+                    <div class="control-button">
+                        <p>Back:</p>
+                        <select class="key-select" id="back-key"data-default="s" value="S">
+                            <option value="s">S</option>
+                            <option value="d">D</option>
+                            <option value="w">W</option>
+                            <option value="a">A</option>
+                            <option value="up">Up Arrow</option>
+                            <option value="down">Down Arrow</option>
+                            <option value="spacebar">Spacebar</option>
+                        </select>
+                    </div>
+                    <div class="control-button">
+                        <p>Right:</p>
+                        <select class="key-select" id="right-key"data-default="d" value="D">
+                            <option value="d">D</option>
+                            <option value="w">W</option>
+                            <option value="a">A</option>
+                            <option value="s">S</option>
+                            <option value="up">Up Arrow</option>
+                            <option value="down">Down Arrow</option>
+                            <option value="spacebar">Spacebar</option>
+                        </select>
+                    </div>
+                    <div class="control-button">
+                        <p>Left:</p>
+                        <select class="key-select" id="left-key"data-default="a" value="A">
+                            <option value="a">A</option>
+                            <option value="d">D</option>
+                            <option value="w">W</option>
+                            <option value="s">S</option>
+                            <option value="up">Up Arrow</option>
+                            <option value="down">Down Arrow</option>
+                            <option value="spacebar">Spacebar</option>
+                        </select>
+                    </div>
+                    <div class="control-button">
+                        <p>Up:</p>
+                        <select class="key-select" id="up-key"data-default="ArrowUp" value="ArrowUp">
+                            <option value="up">Up Arrow</option>
+                            <option value="d">D</option>
+                            <option value="w">W</option>
+                            <option value="a">A</option>
+                            <option value="s">S</option>
+                            <option value="down">Down Arrow</option>
+                            <option value="spacebar">Spacebar</option>
+                        </select>
+                    </div>
+                    <div class="control-button">
+                        <p>Down:</p>
+                        <select class="key-select" id="down-key"data-default="ArrowDown" value="ArrowDown">
+                            <option value="down">Down Arrow</option>
+                            <option value="d">D</option>
+                            <option value="w">W</option>
+                            <option value="a">A</option>
+                            <option value="s">S</option>
+                            <option value="up">Up Arrow</option>
+                            <option value="spacebar">Spacebar</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="screenrecord-container">
+                    <p>Screen Record:</p>
+                    <i id="recordIcon" class="fa-solid fa-record-vinyl"></i>
+                </div> 
+            </div>
+        </div>
+        <div class="content" id="about-content" style="display: none;">
+            <h2>About and Help Settings</h2>
+            <p>A small paragraph talking about the drone functionalities</p>
+        </div>
+
+        <script>
+            const connectionTab = document.querySelector('.connection-tab');
+            const controlsTab = document.querySelector('.controls-tab');
+            const aboutTab = document.querySelector('.about-tab');
+            const connectionContent = document.getElementById('connection-content');
+            const controlsContent = document.getElementById('controls-content');
+            const aboutContent = document.getElementById('about-content');
+            const tabElements = document.querySelectorAll('.tabs-container span');
+            const contentElements = [connectionContent, controlsContent, aboutContent];
+            const tabs = [connectionTab, controlsTab, aboutTab];
+            tabs.forEach((tab, index) => {
+                tab.addEventListener('click', () => {
+                    // Hide all content by default
+                    contentElements.forEach(content => content.style.display = 'none');
+
+                    // Remove active-tab class from all tabs
+                    tabs.forEach(tab => tab.classList.remove('active-tab'));
+
+                    // Display the content of the clicked tab
+                    contentElements[index].style.display = 'block';
+
+                    // Add active-tab class to the clicked tab
+                    tab.classList.add('active-tab');
+                });
+            });        
+            connectionTab.addEventListener('click', () => {
+                connectionContent.style.display = 'block';
+                controlsContent.style.display = 'none';
+                aboutContent.style.display = 'none';
+            });
+
+            controlsTab.addEventListener('click', () => {
+                connectionContent.style.display = 'none';
+                controlsContent.style.display = 'block';
+                aboutContent.style.display = 'none';
+            });
+
+            aboutTab.addEventListener('click', () => {
+                connectionContent.style.display = 'none';
+                controlsContent.style.display = 'none';
+                aboutContent.style.display = 'block';
+            });
+            document.getElementById('recordIcon').addEventListener('click', function() {
+                // Navigate to the record button page
+                window.location.href = "../Record_Button/recordbutton.html";
+            });
+            document.addEventListener('DOMContentLoaded', function() {
+                // Check if recording is active
+                if (localStorage.getItem("recording") === "true") {
+                    const recordIcon = document.getElementById('recordIcon');
+                    recordIcon.style.color = "red"; // Change the color to red to indicate recording
+                    recordIcon.classList.add('fa-pulse'); // Make the icon pulse to indicate active recording
+                }
+            });
+        
+
+        </script>
+    </div>
+</body>
+</html>

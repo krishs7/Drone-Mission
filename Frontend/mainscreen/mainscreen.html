@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Application</title>
+    <link rel="stylesheet" href="mainscreen.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Drone Control</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#" id="about-tab"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="#" id="features-tab"><i class="fas fa-cogs"></i> Features</a></li>
+            <li><a href="file:///Users/fatemahridi/Desktop/DroneMission/SettingScreen/setting_screen.html" id="menu-tab"><i class="fas fa-cog"></i> Settings Menu</a></li>
+        </ul>
+    </nav>
+    <section class="main-content">
+        <div class="content" id="about-content">
+            <h2>About Our Drone Application</h2>
+            <p>Drone</p>
+            <p>Introducing our drone application: the gadget that turns your smartphone into the ultimate remote control for the most sophisticated and fun aerial adventure you've ever experienced! Imagine being the commander of your very own flying robot, soaring through the skies with the effortless grace of a seagull, only without the awkward squawking. With our app, you're in charge of the skies, and you don't even need a pilot's license – just a sense of adventure and a desire to explore your world from above. Picture this: you're sitting in your backyard, sipping a cool lemonade, and from the palm of your hand, you launch your trusty drone companion into the wide blue yonder. It zips through the air like a stealthy superhero, taking in breathtaking vistas, capturing stunning snapshots, and making you feel like the king or queen of the sky. But that's not all! The app's got more tricks up its sleeve than a magician's hat. Whether you want to show off your flying skills, spy on your neighbors (just kidding, please don't), or simply embrace your inner tech guru, our drone application has you covered. From wireless wizardry to flight statistics that make you feel like an ace pilot, we've got all the features to keep you entertained. Get ready to take your imagination to new heights – welcome to the drone revolution, where the sky's the limit, and the fun never ends!</p>
+        </div>
+        <div class="content" id="features-content" style="display: none;">
+            <h2>Key Features</h2>
+            <div class="features">
+                <div class="feature" id="wireless-control">
+                    <i class="fas fa-wifi"></i>
+                    <h3>Wireless Control</h3>
+                    <p>Control your drone wirelessly with ease. Fly it effortlessly using your smartphone or tablet.</p>
+                    <p>Additional Features:
+                        <ul>
+                            <li>Remote Range: 500 meters</li>
+                            <li>Real-time Video Streaming</li>
+                            <li>Responsive Touch Controls</li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="feature" id="snapshot-capture">
+                    <i class="fas fa-camera"></i>
+                    <h3>Snapshot Capture</h3>
+                    <p>Capture snapshots with your drone's camera. Take stunning photos and share your aerial perspectives.</p>
+                    <p>Additional Features:
+                        <ul>
+                            <li>High-Resolution Camera (12 MP)</li>
+                            <li>Auto-Focus and Zoom</li>
+                            <li>Multiple Capture Modes</li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="feature" id="flight-stats">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Flight Stats</h3>
+                    <p>View flight statistics and data. Keep track of your drone's performance and improve your flying skills.</p>
+                    <p>Additional Features:
+                        <ul>
+                            <li>Flight Time Tracking</li>
+                            <li>Altitude and Speed Data</li>
+                            <li>GPS Positioning</li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="feature" id="gps-navigation">
+                    <i class="fas fa-route"></i>
+                    <h3>GPS Navigation</h3>
+                    <p>Precise GPS navigation for accurate flight control. Plan routes and explore new locations with ease.</p>
+                    <p>Additional Features:
+                        <ul>
+                            <li>Waypoint Navigation</li>
+                            <li>Geofencing for Safety</li>
+                            <li>Return to Home Function</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2023 Drone Control</p>
+    </footer>
+    
+    <script>
+        const aboutTab = document.getElementById('about-tab');
+        const featuresTab = document.getElementById('features-tab');
+        const menuTab = document.getElementById('menu-tab');
+        const aboutContent = document.getElementById('about-content');
+        const featuresContent = document.getElementById('features-content');
+
+        aboutTab.addEventListener('click', () => {
+            aboutContent.style.display = 'block';
+            featuresContent.style.display = 'none';
+        });
+
+        featuresTab.addEventListener('click', () => {
+            aboutContent.style.display = 'none';
+            featuresContent.style.display = 'block';
+        });
+
+        const features = document.querySelectorAll('.feature');
+
+        features.forEach(feature => {
+            feature.addEventListener('click', () => {
+                feature.style.backgroundColor = 'lightblue'; // Change the background color
+                // You can add more details or actions when a feature is clicked.
+            });
+        });
+
+        // You can add more logic to handle the "Menu" tab's functionality.
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="drone_screen.css" />
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    </head>
+
+    <body>
+        <nav class="main-menu">
+            <p>
+                Drone Mission
+            </p>
+            <ul class="item-list">
+                <li> <a href="#" class="material-icons">notifications</a> </li>
+                <li> <a href="#" class="material-icons">settings</i> </li>
+                <li> <a href="#" class="material-icons">account_circle</a> </li>
+            </ul>
+        </nav>
+
+        <section class="drone">
+            <div class="drone-control">
+                <button class="control-button"
+                    onclick="showMessage('Keyboard is in use')"> <i
+                        class="material-icons">keyboard</i></button>
+                <button class="control-button"
+                    onclick="showMessage('Controller is in use')"> <i
+                        class="material-icons">sports_esports</i></button>
+                <button class="control-button" 
+                    onclick="showMessage('Phone is in use')"> <i
+                        class="material-icons">smartphone</i></button>
+            </div>
+
+            <div class="drone-screen">
+                <img src="../images/placeholder.png" alt="Placeholder Image">
+            </div>
+
+            <div class="drone-action">
+                <button class="action-button" onclick="showMessage('Drone is taking off')"> Takeoff </p></button>
+                <button class="action-button"
+                    onclick="showMessage('Preparing for landing')"> Land </button>
+                <button class="action-button" style="background-color: var(--warning);"
+                    onclick="showMessage('Emergency stop initiated')"> Emergency Stop </button>
+            </div>
+        </section>
+
+        <div id="popup" class="popup">
+            <!-- <span class="close" onclick="closeMessage()">&times;</span> -->
+            <p id="messageText"></p>
+        </div>
+    </body>
+
+    <script>
+        var popupTimer;
+
+        function showMessage(message) {
+            var popup = document.getElementById("popup");
+            var messageText = document.getElementById("messageText");
+
+            messageText.innerHTML = message;
+            popup.style.display = "block";
+
+            popupTimer = setTimeout(closeMessage, 3000);
+        }
+
+        function closeMessage() {
+            var popup = document.getElementById("popup");
+            popup.style.display = "none";
+
+            clearTimeout(popupTimer);
+        }
+    </script>
+</html>

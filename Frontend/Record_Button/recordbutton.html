@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Screen Recorder</title>
+    <link rel="stylesheet" href="recordbtn.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- website: font awesome-->
+</head>
+<body>
+    <nav class="nav-bar">
+        <a class="nav-button" href="../SettingScreen/setting_screen.html"target="_blank">Settings <i class="fa-solid fa-gear"></i></a> <!--might need to remove target=blank-->
+        <a class="nav-button" href="../mainscreen/mainscreen.html"target="_blank">Home <i class="fa-solid fa-house"></i></a><!--might need to remove target=blank-->
+        <a class="nav-button" href="../DroneScreen/drone_screen.html"target="_blank">Drone Screen <img src="/images/drone.png" alt="Drone" width="35px" height="35px"></a><!--might need to remove target=blank-->
+    </nav>
+    
+    <div class="screenrecord-card">
+        <!-- Buttons and elements for controlling and displaying the recording -->
+    <button id="startRecord">Start Recording</button>
+    <button id="stopRecord" disabled>Stop Recording</button>
+    <a id="downloadRecorded" style="display: none;">Download Recording</a>
+    <div id="recordingOverlay"></div>
+    <video id="recordedVideo" controls style="display: none;"></video>
+    </div>
+    <script>
+
+        // Variables for managing the recording 
+        let mediaStream;
+        let mediaRecorder;
+        let recordedChunks = [];
+
+        const startRecordButton = document.getElementById("startRecord");
+        const stopRecordButton = document.getElementById("stopRecord");
+        const recordedVideo = document.getElementById("recordedVideo");
+        const recordingOverlay = document.getElementById("recordingOverlay");
+        const downloadRecordedButton = document.getElementById("downloadRecorded");
+
+        let isRecording = false;
+
+        startRecordButton.addEventListener("click", async () => {
+            try {
+
+                localStorage.setItem("recording", "true");
+
+                 // Request access to the screen
+                mediaStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+
+                mediaRecorder = new MediaRecorder(mediaStream);
+
+                mediaRecorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) {
+                        recordedChunks.push(event.data);
+                    }
+                };
+
+                mediaRecorder.onstop = () => {
+                    const recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
+                    recordedVideo.src = URL.createObjectURL(recordedBlob);
+                    downloadRecordedButton.href = recordedVideo.src;
+                    downloadRecordedButton.style.display = "block";
+                };
+
+                // Start recording
+                mediaRecorder.start();
+
+                startRecordButton.disabled = true;
+                stopRecordButton.disabled = false;
+                recordingOverlay.style.display = "block";
+                isRecording = true;
+
+                stopRecordButton.addEventListener("click", () => {
+                    localStorage.removeItem("recording");
+
+                // Stop recording and release media stream
+                    if (mediaRecorder.state === "recording") {
+                        mediaRecorder.stop();
+                        mediaStream.getTracks().forEach((track) => track.stop());
+                    }
+                    startRecordButton.disabled = false;
+                    stopRecordButton.disabled = true;
+                    recordingOverlay.style.display = "none";
+                    isRecording = false;
+                });
+            } catch (err) {
+                console.error("Error accessing screen recording:", err);
+            }
+        });
+    </script> 
+    
+</body>
+</html>
